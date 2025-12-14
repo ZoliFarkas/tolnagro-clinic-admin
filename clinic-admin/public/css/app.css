@@ -30,6 +30,9 @@
 .sub-nav {
     background-color: #184f8c; /* sötétkék */
     padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
 }
 
 .sub-nav-link {
@@ -46,9 +49,12 @@
 /* AKTÍV / KIEMELT MENÜ */
 .sub-nav-link.active,
 .sub-nav-link:hover {
+    box-shadow: inset 0 -3px 0 #ffffff;
     background-color: #1f9bd1; /* világoskék */
     color: #ffffff;
 }
 .main-content {
     margin-top: 24px;
+}
+.sub-nav {
 }

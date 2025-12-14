@@ -6,21 +6,35 @@
     <title>Rendelő Admin</title>
     <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-    <div class="container">
-        <a class="navbar-brand" href="{{ route('patients.index') }}">Rendelő Admin</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ route('patients.index') }}">Betegek</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('statistics.index') }}">Statisztika</a></li>
-            </ul>
+<header class="top-header">
+    <div class="container d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+            <img src="{{ asset('images/tolnagro_logo.svg') }}" alt="Tolnagro" class="logo">
         </div>
+    </div>
+</header>
+<nav class="sub-nav">
+    <div class="container d-flex gap-3">
+        <a href="{{ route('patients.index') }}"
+           class="sub-nav-link {{ request()->routeIs('patients.*') ? 'active' : '' }}">
+            BETEGEK
+        </a>
+        <a href="{{ route('visits.index') }}"
+           class="sub-nav-link {{ request()->routeIs('visits.*') ? 'active' : '' }}">
+            VIZITEK
+        </a>
+        <a href="{{ route('statistics.index') }}"
+           class="sub-nav-link {{ request()->routeIs('statistics.*') ? 'active' : '' }}">
+            STATISZTIKA
+        </a>
     </div>
 </nav>
 
-<div class="container">
+<div class="container main-content">
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -33,7 +47,22 @@
 
     @yield('content')
 </div>
+@foreach (['success', 'error', 'warning'] as $type)
+    @if(session($type))
+        <div class="alert alert-{{ $type == 'error' ? 'danger' : $type }}">
+            {{ session($type) }}
+        </div>
+    @endif
+@endforeach
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    })
+</script>
 </body>
 </html>

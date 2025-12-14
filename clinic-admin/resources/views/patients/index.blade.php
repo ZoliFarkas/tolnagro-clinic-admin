@@ -45,6 +45,7 @@
         </table>
 
         {{ $patients->links() }}
+
     @else
         <div class="alert alert-info">Nincs találat.</div>
     @endif

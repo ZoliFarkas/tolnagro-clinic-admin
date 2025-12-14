@@ -6,7 +6,7 @@
             <h3>{{ $patient->name }}</h3>
             <p class="mb-0"><strong>Email:</strong> {{ $patient->email }}</p>
             <p class="mb-0"><strong>Telefon:</strong> {{ $patient->phone ?? '-' }}</p>
-            <p class="mb-0"><strong>Születés:</strong> {{ $patient->birth_date?->format('Y-m-d') ?? '-' }}</p>
+            <p class="mb-0"><strong>Születés:</strong>{{ $patient->birth_date ? $patient->birth_date->format('Y-m-d') : '-' }}</p>
         </div>
         <div>
             <a href="{{ route('patients.edit', $patient) }}" class="btn btn-outline-secondary">Szerkeszt</a>
